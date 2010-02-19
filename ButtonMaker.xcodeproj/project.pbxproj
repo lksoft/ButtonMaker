@@ -35,6 +35,7 @@
 		8D1107310486CEB800E47090 /* Button_Maker-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Button_Maker-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
 		D2C3F120112DC14600C8F119 /* save-me.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "save-me.png"; sourceTree = "<group>"; };
 		D2C3F29E112EBDF600C8F119 /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
+		D2C3F2AA112EC05900C8F119 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -87,6 +88,7 @@
 			children = (
 				32CA4F630368D1EE00C91783 /* ButtonMaker_Prefix.pch */,
 				29B97316FDCFA39411CA2CEA /* main.m */,
+				D2C3F2AA112EC05900C8F119 /* README.md */,
 			);
 			name = "Other Sources";
 			sourceTree = "<group>";
