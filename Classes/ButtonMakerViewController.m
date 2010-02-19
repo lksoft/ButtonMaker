@@ -138,7 +138,8 @@
 	//	If the path is empty, then ask the user for that first
     NSArray		*paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString	*basePath = ([paths count] > 0) ? [paths objectAtIndex:0] : nil;
-	NSString	*filePath = [basePath stringByAppendingPathComponent:@"button.png"];
+	NSString	*normalStateFilePath = [basePath stringByAppendingPathComponent:@"button.png"];
+	NSString	*highlightedStateFilePath = [basePath stringByAppendingPathComponent:@"button_highlighted.png"];
 	
 	//	Get the list of reference data loaded from the defaults
 	NSUserDefaults	*defaults = [NSUserDefaults standardUserDefaults];
@@ -149,15 +150,10 @@
 		[self.button setTitle:@"" forState:UIControlStateNormal];
 	}
 	
-	UIGraphicsBeginImageContext(self.button.frame.size);
-	CGContextRef theContext = UIGraphicsGetCurrentContext();
-	[self.button.layer renderInContext:theContext];
-	
-	UIImage *theImage = UIGraphicsGetImageFromCurrentImageContext();
-	NSData *theData = UIImagePNGRepresentation(theImage);
-	[theData writeToFile:filePath atomically:NO];
-	
-	UIGraphicsEndImageContext();
+	[self saveButtonAtPath:normalStateFilePath];
+	self.button.highlighted = YES;
+	[self saveButtonAtPath:highlightedStateFilePath];
+	self.button.highlighted = NO;
 
 	//	Reset the text if necessary
 	if (self.useTextSwitch.on) {
@@ -167,7 +163,7 @@
 	//	Give a message about the location if required
 	if (!locationWarningGiven) {
 		
-		NSString	*theMessage = [NSString stringWithFormat:@"Button was saved to App’s Documents folder: %@", filePath];
+		NSString	*theMessage = [NSString stringWithFormat:@"Button was saved to App’s Documents folder: %@", normalStateFilePath];
 		UIAlertView	*alert = [[UIAlertView alloc] initWithTitle:@"Button Saved" message:theMessage delegate:nil
 											  cancelButtonTitle:@"Won’t Be Shown Again" otherButtonTitles:nil];
 		
@@ -191,6 +187,18 @@
 		[UIView commitAnimations];
 
 	}
+}
+
+- (void)saveButtonAtPath:(NSString *)filePath  {
+	UIGraphicsBeginImageContext(self.button.frame.size);
+	CGContextRef theContext = UIGraphicsGetCurrentContext();
+	[self.button.layer renderInContext:theContext];
+	
+	UIImage *theImage = UIGraphicsGetImageFromCurrentImageContext();
+	NSData *theData = UIImagePNGRepresentation(theImage);
+	[theData writeToFile:filePath atomically:NO];
+	
+	UIGraphicsEndImageContext();
 }
 
 - (void)animationDidStop:(CAAnimation *)anim finished:(BOOL)flag {

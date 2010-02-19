@@ -58,6 +58,7 @@
 - (IBAction)otherValueChanged:(id)sender;
 
 - (IBAction)saveButton;
+- (void)saveButtonAtPath:(NSString *)filePath;
 
 @end
 
